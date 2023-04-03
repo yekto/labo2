@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:labo2/components/mybutton.dart';
 import 'package:labo2/components/mytextfield.dart';
 
 class LoginPage extends StatelessWidget {
@@ -6,6 +7,8 @@ class LoginPage extends StatelessWidget {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void signUserin() {}
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class LoginPage extends StatelessWidget {
                 Icons.lock,
                 size: 100,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Text(
@@ -36,14 +39,16 @@ class LoginPage extends StatelessWidget {
                   controller: usernameController,
                   hintText: "Username",
                   obscureText: false),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               MyTextField(
                   controller: passwordController,
                   hintText: "Password",
                   obscureText: true),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -52,6 +57,30 @@ class LoginPage extends StatelessWidget {
                     Text("Forgot password?"),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MyButton(
+                onTap: () {},
+              ),
+              const SizedBox(height: 25),
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      thickness: 0.5,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                  Text("You can follow"),
+                  Expanded(
+                    child: Divider(
+                      thickness: 0.5,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                ],
               )
             ],
           ),
