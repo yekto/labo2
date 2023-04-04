@@ -23,7 +23,16 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(child: Text("Loged in as " + user.email!)),
+      body: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Loged in as " + user.email!),Text("logeddddd in as ${user.phoneNumber}")
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

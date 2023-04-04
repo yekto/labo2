@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:labo2/components/mybutton.dart';
 import 'package:labo2/components/mytextfield.dart';
 import 'package:labo2/components/square_tile.dart';
+import 'package:labo2/pages/auth_page.dart';
+import 'package:labo2/pages/home_page.dart';
+import 'package:labo2/pages/hometest.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -47,19 +50,12 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return const AlertDialog(
-          title: Text('Incorrect email'),backgroundColor: Colors.red,
-        );
-      },
-    );
-  }
-
-  void wrongEmailPass() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          icon: Icon(Icons.male),
-          title: Text('Incorrect email'),
+          title: Center(
+              child: Text(
+            'Incorrect email',
+            style: TextStyle(color: Colors.white),
+          )),
+          backgroundColor: Colors.red,
         );
       },
     );
@@ -70,7 +66,12 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return const AlertDialog(
-          title: Text('Incorrect passsword'),
+          title: Center(
+              child: Text(
+            'Incorrect passsword',
+            style: TextStyle(color: Colors.white),
+          )),
+          backgroundColor: Colors.red,
         );
       },
     );
@@ -114,11 +115,9 @@ class _LoginPageState extends State<LoginPage> {
                         controller: passwordController,
                         hintText: "Password",
                         obscureText: true),
-
                     const SizedBox(
                       height: 10,
                     ),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -179,6 +178,12 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {},
                           child: Text("Register Now"),
                         ),
+                        SizedBox(width: 12,),
+                        GestureDetector(
+                          onTap: (){Navigator.push(context,MaterialPageRoute(builder: (context)=> HomeTest()));
+                          },
+                          child: Text("REG"),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -190,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "Powered by @topi23may",
+                            "Powered by @topi23may™",
                             style: TextStyle(fontSize: 8),
                           )
                         ],
