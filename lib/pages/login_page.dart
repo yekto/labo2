@@ -1,15 +1,80 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:labo2/components/mybutton.dart';
 import 'package:labo2/components/mytextfield.dart';
 import 'package:labo2/components/square_tile.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final usernameController = TextEditingController();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signUserin() {}
+  void signUserin() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'user-not-found') {
+        print("Wrong email");
+        wrongEmailMessage();
+      } else if (e.code == 'wrong-password') {
+        print("Wrong password");
+        wrongPasswordMessage();
+      }
+    }
+  }
+
+  void wrongEmailMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text('Incorrect email'),backgroundColor: Colors.red,
+        );
+      },
+    );
+  }
+
+  void wrongEmailPass() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          icon: Icon(Icons.male),
+          title: Text('Incorrect email'),
+        );
+      },
+    );
+  }
+
+  void wrongPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text('Incorrect passsword'),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +104,8 @@ class LoginPage extends StatelessWidget {
                       height: 25,
                     ),
                     MyTextField(
-                        controller: usernameController,
-                        hintText: "Username",
+                        controller: emailController,
+                        hintText: "Email address",
                         obscureText: false),
                     const SizedBox(
                       height: 10,
@@ -49,9 +114,11 @@ class LoginPage extends StatelessWidget {
                         controller: passwordController,
                         hintText: "Password",
                         obscureText: true),
+
                     const SizedBox(
                       height: 10,
                     ),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -102,7 +169,7 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 16,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -113,11 +180,26 @@ class LoginPage extends StatelessWidget {
                           child: Text("Register Now"),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Powered by @topi23may",
+                            style: TextStyle(fontSize: 8),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
               ],
-            )), ////////asdasdasd
+            )),
           ),
         ),
       ),
