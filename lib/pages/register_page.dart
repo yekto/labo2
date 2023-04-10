@@ -7,19 +7,19 @@ import 'package:labo2/pages/auth_page.dart';
 import 'package:labo2/pages/home_page.dart';
 import 'package:labo2/pages/hometest.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  LoginPage({Key? key,required this.onTap}) : super(key: key);
+  RegisterPage({Key? key,required this.onTap}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signUserin() async {
+  void signUserUp() async {
     showDialog(
       context: context,
       builder: (context) {
@@ -53,9 +53,9 @@ class _LoginPageState extends State<LoginPage> {
         return const AlertDialog(
           title: Center(
               child: Text(
-            'Incorrect email',
-            style: TextStyle(color: Colors.white),
-          )),
+                'Incorrect email',
+                style: TextStyle(color: Colors.white),
+              )),
           backgroundColor: Colors.red,
         );
       },
@@ -69,9 +69,9 @@ class _LoginPageState extends State<LoginPage> {
         return const AlertDialog(
           title: Center(
               child: Text(
-            'Incorrect passsword',
-            style: TextStyle(color: Colors.white),
-          )),
+                'Incorrect passsword',
+                style: TextStyle(color: Colors.white),
+              )),
           backgroundColor: Colors.red,
         );
       },
@@ -119,6 +119,10 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 10,
                     ),
+                    MyTextField(
+                        controller: passwordController,
+                        hintText: "Confirm Password",
+                        obscureText: true),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -132,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 10,
                     ),
                     MyButton(
-                      onTap: signUserin,
+                      onTap: signUserUp,
                     ),
                     const SizedBox(height: 25),
                     Row(
@@ -174,10 +178,10 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Not a member? ", style: TextStyle(fontSize: 13),),
+                        Text("Already have an account? ", style: TextStyle(fontSize: 13),),
                         GestureDetector(
                           onTap: widget.onTap,
-                          child: Text("Register Now", style: TextStyle(color: Colors.blue, fontSize: 13, fontWeight: FontWeight.bold),),
+                          child: Text("Login Now", style: TextStyle(color: Colors.blue, fontSize: 13, fontWeight: FontWeight.bold),),
                         )
                       ],
                     ),

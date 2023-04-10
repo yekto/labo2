@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:labo2/pages/home_page.dart';
 import 'package:labo2/pages/login_page.dart';
 
+import 'login_or_register_page.dart';
+
 
 class AuthPage extends StatelessWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class AuthPage extends StatelessWidget {
             return HomePage();
           }
           else {
-            return LoginPage();
+            return LoginOrRegisterPage();
           }
         },
       ),
