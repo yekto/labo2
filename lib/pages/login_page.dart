@@ -36,40 +36,18 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      if (e.code == 'user-not-found') {
-        print("Wrong email");
-        wrongEmailMessage();
-      } else if (e.code == 'wrong-password') {
-        print("Wrong password");
-        wrongPasswordMessage();
-      }
+      showErrorMessage(e.code);
     }
   }
 
-  void wrongEmailMessage() {
+  void showErrorMessage(String message) {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
+        return AlertDialog(
           title: Center(
               child: Text(
-            'Incorrect email',
-            style: TextStyle(color: Colors.white),
-          )),
-          backgroundColor: Colors.red,
-        );
-      },
-    );
-  }
-
-  void wrongPasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Center(
-              child: Text(
-            'Incorrect passsword',
+            message,
             style: TextStyle(color: Colors.white),
           )),
           backgroundColor: Colors.red,
@@ -132,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 10,
                     ),
                     MyButton(
+                      text: "Sign In",
                       onTap: signUserin,
                     ),
                     const SizedBox(height: 25),

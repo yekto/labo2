@@ -18,6 +18,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   void signUserUp() async {
     showDialog(
@@ -29,31 +30,32 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+      if (passwordController.text == confirmPasswordController.text){
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+      } else {
+        Navigator.pop(context);
+        showErrorMessage('Password not match');
+        return null;
+      }
+
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      if (e.code == 'user-not-found') {
-        print("Wrong email");
-        wrongEmailMessage();
-      } else if (e.code == 'wrong-password') {
-        print("Wrong password");
-        wrongPasswordMessage();
-      }
+      showErrorMessage(e.code);
     }
   }
 
-  void wrongEmailMessage() {
+  void showErrorMessage(String message) {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
+        return AlertDialog(
           title: Center(
               child: Text(
-                'Incorrect email',
+                message,
                 style: TextStyle(color: Colors.white),
               )),
           backgroundColor: Colors.red,
@@ -62,21 +64,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void wrongPasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Center(
-              child: Text(
-                'Incorrect passsword',
-                style: TextStyle(color: Colors.white),
-              )),
-          backgroundColor: Colors.red,
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +83,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       size: 100,
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     Text(
-                      "Welcome back to Topi23may",
+                      "Let's create an Account for you",
                       style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(
@@ -120,9 +107,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 10,
                     ),
                     MyTextField(
-                        controller: passwordController,
+                        controller: confirmPasswordController,
                         hintText: "Confirm Password",
                         obscureText: true),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -136,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 10,
                     ),
                     MyButton(
+                      text: "Sign Up",
                       onTap: signUserUp,
                     ),
                     const SizedBox(height: 25),
