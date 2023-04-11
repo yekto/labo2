@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Loged in as " + user.email!),Text("logeddddd in as ${user.phoneNumber}")
+              Text("Loged in as " + user.email!),Text("logeddddd in as ${user.phoneNumber}"), Text("User is"+ user.uid)
             ],
           ),
         ),
