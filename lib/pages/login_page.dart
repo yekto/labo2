@@ -5,7 +5,7 @@ import 'package:labo2/components/mytextfield.dart';
 import 'package:labo2/components/square_tile.dart';
 import 'package:labo2/pages/auth_page.dart';
 import 'package:labo2/pages/home_page.dart';
-import 'package:labo2/pages/hometest.dart';
+import 'package:labo2/pages/main_home.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;

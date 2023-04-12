@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:labo2/pages/auth_page.dart';
 import 'package:labo2/pages/home_page.dart';
+import 'package:labo2/pages/main_home.dart';
 import 'package:labo2/pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AuthPage(),
+      home: MainHome(),
     );
   }
 }
