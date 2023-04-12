@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:labo2/components/mycolor.dart';
 import 'login_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: MyColor.mainColor,
         actions: [
           IconButton(
             onPressed: signUserOut,
@@ -24,11 +25,12 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Container(
+        // color: MyColor.mainColor,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Loged in as " + user.email!),Text("logeddddd in as ${user.phoneNumber}"), Text("User is"+ user.uid)
+              Text("Loged in as " + user.email!),Text("logeddddd in as ${user.phoneNumber}"), Text("User is"+ user.uid)//PNj52
             ],
           ),
         ),

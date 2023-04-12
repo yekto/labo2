@@ -9,13 +9,15 @@ import 'package:labo2/pages/hometest.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  RegisterPage({Key? key,required this.onTap}) : super(key: key);
+
+  RegisterPage({Key? key, required this.onTap}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -30,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
     try {
-      if (passwordController.text == confirmPasswordController.text){
+      if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
@@ -55,15 +57,14 @@ class _RegisterPageState extends State<RegisterPage> {
         return AlertDialog(
           title: Center(
               child: Text(
-                message,
-                style: TextStyle(color: Colors.white),
-              )),
+            message,
+            style: TextStyle(color: Colors.white),
+          )),
           backgroundColor: Colors.red,
         );
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +81,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Icon(
                       Icons.lock,
-                      size: 100,
+                      size: 75,
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 25,
                     ),
                     Text(
                       "Let's create an Account for you",
@@ -91,6 +92,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(
                       height: 25,
+                    ),
+                    MyTextField(
+                        controller: nameController,
+                        hintText: "Name",
+                        obscureText: false),
+                    const SizedBox(
+                      height: 10,
                     ),
                     MyTextField(
                         controller: emailController,
@@ -129,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       text: "Sign Up",
                       onTap: signUserUp,
                     ),
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 17),
                     Row(
                       children: [
                         Expanded(
@@ -151,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 17,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -169,15 +177,24 @@ class _RegisterPageState extends State<RegisterPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Already have an account? ", style: TextStyle(fontSize: 13),),
+                        Text(
+                          "Already have an account? ",
+                          style: TextStyle(fontSize: 13),
+                        ),
                         GestureDetector(
                           onTap: widget.onTap,
-                          child: Text("Login Now", style: TextStyle(color: Colors.blue, fontSize: 13, fontWeight: FontWeight.bold),),
+                          child: Text(
+                            "Login Now",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
+                          ),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 17,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
