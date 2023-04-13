@@ -1,17 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:labo2/components/mybigtext.dart';
 import 'package:labo2/components/mycolor.dart';
 import 'package:labo2/components/mysmalltext.dart';
 import 'package:labo2/pages/body_home.dart';
+import 'login_page.dart';
 
 class MainHome extends StatefulWidget {
-  const MainHome({Key? key}) : super(key: key);
+  MainHome({Key? key}) : super(key: key);
+  // final user = FirebaseAuth.instance.currentUser!;
+
 
   @override
   State<MainHome> createState() => _MainHomeState();
 }
 
 class _MainHomeState extends State<MainHome> {
+  final user = FirebaseAuth.instance.currentUser!;
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +70,8 @@ class _MainHomeState extends State<MainHome> {
             ),
           ),
           BodyHome(),
+          Text("Logout di Sini bang "+user.displayName.toString()),
+          IconButton(onPressed: signUserOut, icon: Icon(Icons.logout,color: Colors.red,),)
         ],
       ),
     );

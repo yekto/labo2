@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:labo2/components/iconandtextwidget.dart';
 import 'package:labo2/components/mybigtext.dart';
@@ -5,39 +6,73 @@ import 'package:labo2/components/mycolor.dart';
 import 'package:labo2/components/mysmalltext.dart';
 
 class BodyHome extends StatefulWidget {
-  const BodyHome({Key? key}) : super(key: key);
+  BodyHome({Key? key}) : super(key: key);
 
   @override
   State<BodyHome> createState() => _BodyHomeState();
 }
 
 class _BodyHomeState extends State<BodyHome> {
-  PageController pageController = PageController(viewportFraction: 0.85);
-  var _currPageValue=0.0;
+  final PageController pageController = PageController();//viewportFraction: 0.85
+  var _currPageValue = 0.0;
+  double _scaleFactor = 0.8;
 
-  @override void initstate(){
+  @override
+  void initstate() {
     super.initState();
     pageController.addListener(() {
-      setState((){_currPageValue= pageController.page!;
+      setState(() {
+        _currPageValue =  pageController.page!  ;
       });
     });
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      height: 320,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          itemBuilder: (context, position) {
-            return _buildPageItem(position);
-          }),
+    return Column(
+      children: [
+        Container(
+          height: 320,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount: 3,
+              itemBuilder: (context, position) {
+                return _buildPageItem(position);
+              }),
+        ),
+        new DotsIndicator(
+          dotsCount: 5,
+          position: 1,
+          decorator: DotsDecorator(
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        ),
+        Text("Ini page"+pageController.toString()),
+      ],
     );
   }
 
   Widget _buildPageItem(int index) {
+    // Matrix4 matrix = new Matrix4.identity();
+    // if (index == _currPageValue.floor()) {
+    //   var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
+    //
+    //   matrix = Matrix4.diagonal3Values(1, currScale, 1);
+    // } else if (index == _currPageValue.floor() + 1) {
+    //   var currScale =
+    //       _scaleFactor + (_currPageValue - index + 1) * (1 - _scaleFactor);
+    //   matrix = Matrix4.diagonal3Values(1, currScale, 1);
+    // }
+
     return Stack(
       children: [
         Container(
@@ -45,7 +80,7 @@ class _BodyHomeState extends State<BodyHome> {
           margin: EdgeInsets.only(left: 10, right: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: index.isEven ? Color(0xFF69c5df) : MyColor.mainBlackColor,
+              // color: index.isEven ? Color(0xFF69c5df) : MyColor.mainBlackColor,
               image: DecorationImage(
                   image: AssetImage("lib/images/test1.jpg"),
                   fit: BoxFit.cover)),
@@ -60,8 +95,7 @@ class _BodyHomeState extends State<BodyHome> {
               color: Colors.white,
             ),
             child: Container(
-              padding:
-                  EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
+              padding: EdgeInsets.only(top: 15, left: 15, right: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,7 +113,7 @@ class _BodyHomeState extends State<BodyHome> {
                                   color: MyColor.mainColor,
                                   size: 15,
                                 )),
-                        //children: List.generate(5, (index) {return Icon(Icons.star, color: MyColor.mainColor,);}), //sama aja, ini cara tanpa pakai Arrow Function (=>)
+                        // children: List.generate(5, (index) {return Icon(Icons.star, color: MyColor.mainColor,size: 15,);}), //sama aja, ini cara tanpa pakai Arrow Function (=>)
                       ),
                       SizedBox(
                         width: 10,
@@ -99,6 +133,7 @@ class _BodyHomeState extends State<BodyHome> {
                     height: 20,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconAndTextWidget(
                           icon: Icons.circle_sharp,
