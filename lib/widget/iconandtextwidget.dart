@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:labo2/components/mysmalltext.dart';
+import 'package:labo2/widget/mysmalltext.dart';
+
 
 class IconAndTextWidget extends StatelessWidget {
   final IconData icon;

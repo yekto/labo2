@@ -1,9 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:labo2/components/iconandtextwidget.dart';
-import 'package:labo2/components/mybigtext.dart';
-import 'package:labo2/components/mycolor.dart';
-import 'package:labo2/components/mysmalltext.dart';
+import 'package:labo2/widget/iconandtextwidget.dart';
+import 'package:labo2/widget/mybigtext.dart';
+import 'package:labo2/widget/mycolor.dart';
+import 'package:labo2/widget/mysmalltext.dart';
 
 class BodyHome extends StatefulWidget {
   BodyHome({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class BodyHome extends StatefulWidget {
 }
 
 class _BodyHomeState extends State<BodyHome> {
-  final PageController pageController = PageController();//viewportFraction: 0.85
+  final PageController pageController = PageController(initialPage: 0,viewportFraction: 0.85);//
   var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
 
@@ -23,15 +23,16 @@ class _BodyHomeState extends State<BodyHome> {
     pageController.addListener(() {
       setState(() {
         _currPageValue =  pageController.page!  ;
+        print(_currPageValue.toString());
       });
     });
   }
 
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   pageController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _BodyHomeState extends State<BodyHome> {
         ),
         new DotsIndicator(
           dotsCount: 5,
-          position: 1,
+          position: _currPageValue,
           decorator: DotsDecorator(
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),
@@ -62,16 +63,16 @@ class _BodyHomeState extends State<BodyHome> {
   }
 
   Widget _buildPageItem(int index) {
-    // Matrix4 matrix = new Matrix4.identity();
-    // if (index == _currPageValue.floor()) {
-    //   var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
-    //
-    //   matrix = Matrix4.diagonal3Values(1, currScale, 1);
-    // } else if (index == _currPageValue.floor() + 1) {
-    //   var currScale =
-    //       _scaleFactor + (_currPageValue - index + 1) * (1 - _scaleFactor);
-    //   matrix = Matrix4.diagonal3Values(1, currScale, 1);
-    // }
+    Matrix4 matrix = new Matrix4.identity();
+    if (index == _currPageValue.floor()) {
+      var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor);
+
+      matrix = Matrix4.diagonal3Values(1, currScale, 1);
+    } else if (index == _currPageValue.floor() + 1) {
+      var currScale =
+          _scaleFactor + (_currPageValue - index + 1) * (1 - _scaleFactor);
+      matrix = Matrix4.diagonal3Values(1, currScale, 1);
+    }
 
     return Stack(
       children: [

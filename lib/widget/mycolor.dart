@@ -11,4 +11,6 @@ class MyColor {
   static final Color titleColor = const Color(0xFF5c524f);
   static final Color mainBlackColor = const Color(0xFF332d2b);
   static final Color yellowColor = const Color(0xFFffd379);
+  static final Color mainGrey = const Color(0xFFE0E0E0);
+  static final Color grey2 = const Color(0xFF9E9E9E);
 }

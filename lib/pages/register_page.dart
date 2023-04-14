@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:labo2/components/mybutton.dart';
-import 'package:labo2/components/mytextfield.dart';
-import 'package:labo2/components/square_tile.dart';
+import 'package:labo2/widget/mybutton.dart';
+import 'package:labo2/widget/mytextfield.dart';
+import 'package:labo2/widget/square_tile.dart';
 import 'package:labo2/pages/auth_page.dart';
 import 'package:labo2/pages/home_page.dart';
 import 'package:labo2/pages/main_home.dart';
