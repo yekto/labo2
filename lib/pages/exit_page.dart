@@ -18,6 +18,7 @@ class _ExitPageState extends State<ExitPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [Text("Logout di "),
             GestureDetector(
                 child: Text("sini", style: TextStyle(color: Colors.blue),),
