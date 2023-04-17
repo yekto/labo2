@@ -15,10 +15,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // final user = FirebaseAuth.instance.currentUser!;
-  // void signUserOut() {
-  //   FirebaseAuth.instance.signOut();
-  // }
+  final user = FirebaseAuth.instance.currentUser!;
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
 
   int _selectedIndex = 0;
   void navigateBottomBar(int newIndex){

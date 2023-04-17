@@ -9,6 +9,7 @@ class ExitPage extends StatefulWidget {
 }
 
 class _ExitPageState extends State<ExitPage> {
+  final user = FirebaseAuth.instance.currentUser!;
   void signUserOut() {
     FirebaseAuth.instance.signOut();
   }

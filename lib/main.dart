@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => BubbleTeaShop(),
       builder: (context, child) => MaterialApp(
-        home: HomePage(),
+        theme: ThemeData(primarySwatch: Colors.grey),
+        home: AuthPage(),
       ),
     );
   }

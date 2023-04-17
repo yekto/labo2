@@ -5,10 +5,10 @@ class BubbleTeaShop extends ChangeNotifier {
   //list of drinks for sale
   final List<Drink> _shop = [
     Drink(
-        name: "Mix bubble",
+        name: "Ichi Ocha Tea",
         price: "12.000",
         imgs:
-            "https://cdn.shopify.com/s/files/1/0610/0402/1985/products/Monsoon_1200x.png?v=1638596400")
+            "lib/images/tea.png")
   ];
 
   //list of drinks in user cart
@@ -27,7 +27,7 @@ class BubbleTeaShop extends ChangeNotifier {
   }
 
   //remove drinks from chart
-  void removeToCart(Drink drink) {
+  void removeFromCart(Drink drink) {
     _usercart.remove(drink);
     notifyListeners();
   }
