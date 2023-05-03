@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:labo2/pages/auth_page.dart';
 
 class ExitPage extends StatefulWidget {
   const ExitPage({Key? key}) : super(key: key);
@@ -9,9 +10,9 @@ class ExitPage extends StatefulWidget {
 }
 
 class _ExitPageState extends State<ExitPage> {
-  final user = FirebaseAuth.instance.authStateChanges();
   void signUserOut() {
-    FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance.signOut().then((value) => Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => AuthPage(),)));
   }
   @override
   Widget build(BuildContext context) {

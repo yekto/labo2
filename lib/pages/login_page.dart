@@ -36,9 +36,8 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      // myUser.user!.refreshToken;
       if (myUser.user?.emailVerified == true) {
-        Navigator.pop(context);
+
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(
                 email: emailController.text.trim(),
@@ -48,6 +47,8 @@ class _LoginPageState extends State<LoginPage> {
                 MaterialPageRoute(
                   builder: (context) => HomePage(),
                 )));
+        emailController.clear();
+        passwordController.clear();Navigator.pop(context);
       } else {
         Navigator.pop(context);
         showErrorMessage(
