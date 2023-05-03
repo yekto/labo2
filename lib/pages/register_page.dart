@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:labo2/widget/mybutton.dart';
 import 'package:labo2/widget/mytextfield.dart';
 import 'package:labo2/widget/square_tile.dart';
-import 'package:labo2/pages/auth_page.dart';
-import 'package:labo2/pages/home_page.dart';
-import 'package:labo2/pages/main_home.dart';
-
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
 
@@ -33,17 +29,24 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     try {
       if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential myUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
+        Navigator.pop(context);
+        showSuccessMessage("Success Register and you need verify on your Email");
+        await myUser.user!.sendEmailVerification();
+        myUser.user!.reload();
+        emailController.clear();
+        passwordController.clear();
+        confirmPasswordController.clear();
+        return null;
       } else {
         Navigator.pop(context);
         showErrorMessage('Password not match');
         return null;
       }
-
-      Navigator.pop(context);
+      // Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);
@@ -61,6 +64,21 @@ class _RegisterPageState extends State<RegisterPage> {
             style: TextStyle(color: Colors.white),
           )),
           backgroundColor: Colors.red,
+        );
+      },
+    );
+  }
+  void showSuccessMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(
+              child: Text(
+                message,
+                style: TextStyle(color: Colors.white),
+              )),
+          backgroundColor: Colors.green,
         );
       },
     );

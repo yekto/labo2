@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:labo2/widget/mybutton.dart';
 import 'package:labo2/widget/mytextfield.dart';
 import 'package:labo2/widget/square_tile.dart';
-import 'package:labo2/pages/auth_page.dart';
 import 'package:labo2/pages/home_page.dart';
-import 'package:labo2/pages/main_home.dart';
+
+import '../firebase_options.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
-  LoginPage({Key? key,required this.onTap}) : super(key: key);
+
+  LoginPage({Key? key, required this.onTap}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,21 +20,40 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signUserin() async {
+  Future<void> signUserin() async {
     showDialog(
       context: context,
       builder: (context) {
-        return const Center(
+        return Center(
           child: CircularProgressIndicator(),
         );
       },
     );
+
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential myUser =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      Navigator.pop(context);
+      // myUser.user!.refreshToken;
+      if (myUser.user?.emailVerified == true) {
+        Navigator.pop(context);
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim())
+            .then((value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                )));
+      } else {
+        Navigator.pop(context);
+        showErrorMessage(
+            "You need verify your email in " + emailController.text.toString());
+      }
+      // Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);
@@ -153,10 +173,19 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Not a member? ", style: TextStyle(fontSize: 13),),
+                        Text(
+                          "Not a member? ",
+                          style: TextStyle(fontSize: 13),
+                        ),
                         GestureDetector(
                           onTap: widget.onTap,
-                          child: Text("Register Now", style: TextStyle(color: Colors.blue, fontSize: 13, fontWeight: FontWeight.bold),),
+                          child: Text(
+                            "Register Now",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
+                          ),
                         )
                       ],
                     ),
@@ -171,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             "Powered by @topi23may™",
                             style: TextStyle(fontSize: 8),
-                          )
+                          ),
                         ],
                       ),
                     )

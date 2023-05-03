@@ -5,7 +5,6 @@ import 'package:labo2/widget/bottomnavbar.dart';
 import 'package:labo2/widget/mycolor.dart';
 import 'cart_page.dart';
 import 'exit_page.dart';
-import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);

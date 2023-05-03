@@ -4,7 +4,6 @@ import 'package:labo2/widget/mybigtext.dart';
 import 'package:labo2/widget/mycolor.dart';
 import 'package:labo2/widget/mysmalltext.dart';
 import 'package:labo2/pages/body_home.dart';
-import 'login_page.dart';
 
 class MainHome extends StatefulWidget {
   MainHome({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class MainHome extends StatefulWidget {
 }
 
 class _MainHomeState extends State<MainHome> {
-  // final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
   //   FirebaseAuth.instance.signOut();
   // }
@@ -68,7 +67,7 @@ class _MainHomeState extends State<MainHome> {
             ),
           ),
           BodyHome(),
-          // Text("Logout di Sini bang "+user.email.toString()),
+          Text("Logout di Sini bang "+user.email.toString()),
           // IconButton(onPressed: signUserOut, icon: Icon(Icons.logout,color: Colors.red,),)
         ],
       ),

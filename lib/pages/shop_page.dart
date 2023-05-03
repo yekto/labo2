@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:labo2/models/drink.dart';
 import 'package:labo2/models/shop.dart';
@@ -13,6 +15,7 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  final user = FirebaseAuth.instance.currentUser!;
   void goToOrderPage(Drink drink) {
     Navigator.push(
       context,
@@ -32,6 +35,7 @@ class _ShopPageState extends State<ShopPage> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
+              Text(user.email.toString()+" "+user.emailVerified.toString()),
               Text(
                 "Bubble Tea Shop",
                 style: TextStyle(fontSize: 20),

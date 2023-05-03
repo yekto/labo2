@@ -3,7 +3,7 @@ import 'package:labo2/pages/login_page.dart';
 import 'package:labo2/pages/register_page.dart';
 
 class LoginOrRegisterPage extends StatefulWidget {
-  const LoginOrRegisterPage({Key? key}) : super(key: key);
+  LoginOrRegisterPage({Key? key}) : super(key: key);
 
   @override
   State<LoginOrRegisterPage> createState() => _LoginOrRegisterPageState();
