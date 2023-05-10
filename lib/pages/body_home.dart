@@ -49,7 +49,7 @@ class _BodyHomeState extends State<BodyHome> {
         ),
         new DotsIndicator(
           dotsCount: 5,
-          position: _currPageValue,
+          // position: _currPageValue,
           decorator: DotsDecorator(
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),

@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Text(
-                          "  You can follow us  ",
+                          "  Sign in with  ",
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         Expanded(
@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SquareTile(imagePath: "lib/images/ggle.png"),
+                        SquareTile(imagePath: "lib/images/ggle.png",),
                         const SizedBox(
                           width: 30,
                         ),
