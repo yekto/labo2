@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:labo2/services/auth_services.dart';
 import 'package:labo2/widget/mybutton.dart';
 import 'package:labo2/widget/mytextfield.dart';
 import 'package:labo2/widget/square_tile.dart';
 import 'package:labo2/pages/home_page.dart';
 
 import '../firebase_options.dart';
+import 'TEST.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -161,11 +163,11 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SquareTile(imagePath: "lib/images/ggle.png",),
+                        SquareTile(imagePath: "lib/images/ggle.png",onTap: () => AuthServices().signInWithGoogle(),),
                         const SizedBox(
                           width: 30,
                         ),
-                        SquareTile(imagePath: "lib/images/inst.png")
+                        SquareTile(imagePath: "lib/images/inst.png",onTap: (){},)
                       ],
                     ),
                     SizedBox(

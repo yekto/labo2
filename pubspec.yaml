@@ -34,10 +34,13 @@ dependencies:
   cupertino_icons: ^1.0.5
   firebase_core: ^2.11.0
   firebase_auth: ^4.5.0
+  flutter_launcher_icons: ^0.13.1
   dots_indicator: ^3.0.0
   google_nav_bar: ^5.0.6
+  google_fonts: ^4.0.4
   google_sign_in: ^6.1.0
-#  provider:
+  sign_in_button: ^3.2.0
+  provider:
 #  cloud_firestore: ^4.5.1
 
 dev_dependencies:

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:labo2/services/auth_services.dart';
 import 'package:labo2/widget/mybutton.dart';
 import 'package:labo2/widget/mytextfield.dart';
 import 'package:labo2/widget/square_tile.dart';
+
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
 
@@ -29,12 +31,14 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     try {
       if (passwordController.text == confirmPasswordController.text) {
-        UserCredential myUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential myUser =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
         Navigator.pop(context);
-        showSuccessMessage("Success Register and you need verify on your Email");
+        showSuccessMessage(
+            "Success Register and you need verify on your Email");
         await myUser.user!.sendEmailVerification();
         myUser.user!.reload();
         emailController.clear();
@@ -68,6 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
   }
+
   void showSuccessMessage(String message) {
     showDialog(
       context: context,
@@ -75,9 +80,9 @@ class _RegisterPageState extends State<RegisterPage> {
         return AlertDialog(
           title: Center(
               child: Text(
-                message,
-                style: TextStyle(color: Colors.white),
-              )),
+            message,
+            style: TextStyle(color: Colors.white),
+          )),
           backgroundColor: Colors.green,
         );
       },
@@ -175,11 +180,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SquareTile(imagePath: "lib/images/ggle.png"),
+                        SquareTile(
+                          imagePath: "lib/images/ggle.png",
+                          onTap: () => AuthServices().signInWithGoogle(),
+                        ),
                         const SizedBox(
                           width: 30,
                         ),
-                        SquareTile(imagePath: "lib/images/inst.png")
+                        SquareTile(
+                          imagePath: "lib/images/inst.png",
+                          onTap: () {},
+                        )
                       ],
                     ),
                     SizedBox(
