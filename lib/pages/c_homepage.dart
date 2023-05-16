@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:labo2/widget/mytextfield.dart';
 
 import 'auth_page.dart';
 
@@ -11,6 +12,8 @@ class cHomePage extends StatefulWidget {
 }
 
 class _cHomePageState extends State<cHomePage> {
+  final textController = TextEditingController();
+
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   void signUserOut() {
@@ -40,6 +43,20 @@ class _cHomePageState extends State<cHomePage> {
       body: Center(
         child: Column(
           children: [
+            Row(
+              children: [
+                Expanded(
+                  child: MyTextField(
+                      controller: textController,
+                      hintText: "Write a message...",
+                      obscureText: false),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.arrow_forward),
+                )
+              ],
+            ),
             Text("Sign in as" + currentUser.email!)
           ],
         ),
