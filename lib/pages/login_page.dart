@@ -50,13 +50,13 @@ class _LoginPageState extends State<LoginPage> {
                   builder: (context) => HomePage(),
                 )));
         emailController.clear();
-        passwordController.clear();Navigator.pop(context);
+        passwordController.clear();
       } else {
         Navigator.pop(context);
         showErrorMessage(
             "You need verify your email in " + emailController.text.toString());
       }
-      // Navigator.pop(context);
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);

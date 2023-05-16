@@ -4,6 +4,7 @@ import 'package:labo2/models/shop.dart';
 import 'package:labo2/pages/TEST.dart';
 import 'package:labo2/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:labo2/pages/container.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       create: (context) => BubbleTeaShop(),
       builder: (context, child) => MaterialApp(
         theme: ThemeData(primarySwatch: Colors.grey),
-        home: test(),
+        home: AuthPage(),
       ),
     );
   }
